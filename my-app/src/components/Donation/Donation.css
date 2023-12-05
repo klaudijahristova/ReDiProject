@@ -2,6 +2,20 @@
     color: #f79993;
     border: #f79993 2px solid !important;
 }
-.uploadIcon{
-    font-size: large;
-}
+.inputFile {
+    width: 250px;
+    height: 150px;
+    border: 1px solid #ccc;
+    position: relative;
+  }
+  
+  .opacity-0 {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .uploadIconLabel {
+    cursor: pointer;
+  }
+  

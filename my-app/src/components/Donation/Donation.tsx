@@ -1,5 +1,5 @@
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./Donation.css";
 
 function Donation() {
@@ -14,6 +14,9 @@ function Donation() {
   const [decription, setDescription] = useState("");
   const [image, setImage] = useState("");
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
+ 
   const handleSend = () => {
     const newDonation = {
       id: Date.now().toString(),
@@ -147,22 +150,30 @@ function Donation() {
               ></textarea>
             </div>
             <div className="col-10 inputFile mb-1 inputDonation rounded-1 d-flex justify-content-center align-items-center position-relative">
-              <input
-                type="file"
-                className=""
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-              {/* <DriveFolderUploadIcon className="uploadIcon" fontSize="large"/> */}
-              <i className="fa-solid fa-upload"></i>
-              <img
-                src={image}
-                alt="inputFile"
-                width={250}
-                height={150}
-                className="position-absolute position-absolute top-50 start-50 translate-middle"
-              />
-            </div>
+      
+      <input
+    type="file"
+    className="position-absolute opacity-0" 
+    accept="image/*"
+    onChange={handleImageChange}
+    ref={fileInputRef}
+    id="fileUpload" 
+  />
+
+<label htmlFor="fileUpload" className="uploadIconLabel d-flex justify-content-center align-items-center">
+    <DriveFolderUploadIcon sx={{ fontSize: 50 }} className="position-absolute top-50 start-50 translate-middle" />
+  </label>
+
+{image && (
+    <img
+      src={image}
+      alt=""
+      width={250}
+      height={120}
+      className="position-absolute top-50 start-50 translate-middle"
+    />
+  )}
+    </div>
             <div className="col-11 col-md-5 d-grid p-0 mt-3 mb-md-3">
               <button
                 onClick={handleSend}
