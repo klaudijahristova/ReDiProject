@@ -1,0 +1,47 @@
+.inputFile {
+  height: 200px;
+  border: solid black 1px;
+}
+.textareaPosts {
+  height: 300px;
+}
+.cardUsers {
+  box-shadow: 0px 2px 2px 0px #f79993;
+  border: 2px solid #f79993 !important;
+}
+.urgents{
+  box-shadow: 0px 0px 0px 3px #f79993;
+}
+.urgents h5{
+  color: #f79993;
+}
+.cardUsers strong,
+.cardUsers h3 {
+  color: #f79993;
+}
+.cardUsers p {
+  color: #7b7a7a;
+}
+.cardUsers:hover {
+  transform: scale(1.06) translate(0px, -3px);
+  box-shadow: 0px 2px 2px 0px #f79993;
+  transition: 300ms;
+}
+.urgents:hover{
+  transform: scale(1.06) translate(0px, -3px);
+  box-shadow: 0px 0px 0px 3px #f79993;
+  transition: 300ms;
+}
+.decline-btn,
+.accept-btn {
+  width: 48%;
+  margin-left: 3px;
+  color: #565656;
+}
+.delete-btn, .send-btn, .cansel-btn {
+  color: #565656;
+}
+.acceptedInput {
+  color: #7b7a7a !important;
+  border: #f79993 2px solid !important;
+}

@@ -1,0 +1,48 @@
+.custom-color-01 {
+  color: #f79993;
+}
+.custom-color-02{
+    color: #a8a6a6
+}
+
+.titleLP {
+  font-size: 50px;
+}
+@media screen and (max-width:426px) {
+    .titleLP {
+        font-size: 40px;
+      }
+}
+.organisation {
+  bottom: 2%;
+  left: 3%;
+}
+.users {
+  bottom: 2%;
+  right: 3%;
+}
+select{
+    top:3%;
+    left: 3%;
+    border: #f79993 solid 2px;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+@media screen and (max-width:426px){
+    .choose{
+        width: 50%;
+        height: 15px;
+        font-size: 10px;
+    }
+}
+.img4, .img5{
+    box-shadow: 0px 2px 2px 0px #464646;
+    transition: 300ms;
+}
+.img4:hover, .img5:hover{
+    box-shadow: 0px 2px 2px 0px  #464646;
+    transform: scale(1.06) translate(0px, -3px);
+    
+    
+}
