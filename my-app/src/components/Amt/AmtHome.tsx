@@ -2,6 +2,7 @@ import { users } from "../../data/data";
 import { UsersArrayProps } from "../../data/data";
 import { useEffect, useState } from "react";
 import "./Amt.css";
+import CardDonation from "./CardDonation";
 
 const AmtHome = ({
   filteredArray,
@@ -77,97 +78,39 @@ const AmtHome = ({
         <div className="col-12">
           <div className="row justify-content-center">
             {filteredArray && filteredArray.length !== 0
-              ? filteredArray.map((user, index) => (
-                  <div
-                    key={index.toString()}
-                    className="col-11 col-md-5 col-lg-3 card h-100 p-0 postUsers me-md-4 mb-5 cardUsers"
-                  >
-                    <img src={user.image} alt="" className="img-fluid" />
-                    <div className="card-body">
-                      <h3 className="card-title text-center">{user.type}</h3>
-                      <p className="card-text">
-                        <strong>Name: </strong>
-                        {user.name}
-                      </p>
-                      <p>
-                        <strong>Address:</strong> {user.address}
-                      </p>
-                      <p>
-                        <strong>Phone:</strong> {user.phone}
-                      </p>
-                      <p>
-                        <strong>From:</strong> {user.from} <strong>To:</strong>{" "}
-                        {user.to}
-                      </p>
-                      <p>
-                        <strong>Available: </strong>
-                        {user.hours} h
-                      </p>
-                      <p>
-                        <strong>Decription: </strong>
-                        {user.decription}
-                      </p>
-                      <div className="d-flex w-100">
-                        <button
-                          onClick={() => handleAccepted(user.id.toString())}
-                          className="custom-bg-color-01 accept-btn border-0 rounded-2  p-1"
-                        >
-                          Accept
-                        </button>
-                        <button
-                          onClick={() => handleDelete(user.id.toString())}
-                          className="custom-bg-color-02 decline-btn border-0 rounded-2 p-1"
-                        >
-                          Decline
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+              ? filteredArray.map((user) => (
+                <CardDonation
+                key={user.id}
+                image={user.image} 
+                type={user.type}
+                name={user.name}
+                address={user.address}
+                phone={user.phone}
+                from={user.from}
+                to={user.to}
+                hours={user.hours}
+                decription={user.decription}
+                id={user.id}
+                onClickAccepted={() => handleAccepted(user.id.toString())}
+                onClickDelete={() => handleDelete(user.id.toString())}
+              /> 
                 ))
-              : storedUsers.map((user, index) => (
-                  <div
-                    key={index.toString()}
-                    className="col-11 col-md-5 col-lg-3 card h-100 p-0 postUsers me-md-4 mb-5 cardUsers"
-                  >
-                    <img src={user.image} alt="" className="img-fluid" />
-                    <div className="card-body">
-                      <h3 className="card-title text-center">{user.type}</h3>
-                      <p className="card-text">
-                        <strong>Name: </strong>
-                        {user.name}
-                      </p>
-                      <p>
-                        <strong>Address:</strong> {user.address}
-                      </p>
-                      <p>
-                        <strong>Phone:</strong> {user.phone}
-                      </p>
-                      <p>
-                        <strong>From:</strong> {user.from} <strong>To:</strong>{" "}
-                        {user.to}
-                      </p>
-                      <p>
-                        <strong>Available: </strong>
-                        {user.hours} h
-                      </p>
-                      <p>
-                        <strong>Decription: </strong>
-                        {user.decription}
-                      </p>
-                      <button
-                        onClick={() => handleAccepted(user.id.toString())}
-                        className="custom-bg-color-01 accept-btn border-0 rounded-2 p-1"
-                      >
-                        Accept
-                      </button>
-                      <button
-                        onClick={() => handleDelete(user.id.toString())}
-                        className="custom-bg-color-02 decline-btn border-0 rounded-2 p-1"
-                      >
-                        Decline
-                      </button>
-                    </div>
-                  </div>
+              : storedUsers.map((user) => (
+                <CardDonation
+                key={user.id}
+                image={user.image} 
+                type={user.type}
+                name={user.name}
+                address={user.address}
+                phone={user.phone}
+                from={user.from}
+                to={user.to}
+                hours={user.hours}
+                decription={user.decription}
+                id={user.id}
+                onClickAccepted={() => handleAccepted(user.id.toString())}
+                onClickDelete={() => handleDelete(user.id.toString())}
+              />
                 ))}
           </div>
         </div>

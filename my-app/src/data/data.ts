@@ -9,6 +9,8 @@ export interface UsersArrayProps {
   hours: string;
   decription: string;
   image: string;
+  onClickAccepted?: () => void;
+  onClickDelete?:()=>void
 }
 
 export const users = [
