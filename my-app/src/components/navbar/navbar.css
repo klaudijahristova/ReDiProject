@@ -48,7 +48,7 @@
     background-color: rgb(238, 238, 238);
   }
   .navColapse {
-    padding-top: 35px;
+    padding-top: 30px;
   }
 }
 .userName {
@@ -113,4 +113,8 @@
 }
 .navLink:hover {
   color: #a8a6a6 !important;
+}
+.goBack {
+  background-color: #f79993;
+  color: #868686;
 }

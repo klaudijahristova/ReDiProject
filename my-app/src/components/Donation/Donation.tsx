@@ -3,50 +3,43 @@ import { useRef, useState } from "react";
 import "./Donation.css";
 
 function Donation() {
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [fromHours, setFromHours] = useState("");
-  const [toHours, setToHours] = useState("");
-  const [decription, setDescription] = useState("");
-  const [image, setImage] = useState("");
+
+ 
+  const [formData, setFormData] = useState({
+    id: Date.now().toString(),
+    name: "",
+    type: "",
+    address: "",
+    phone: "",
+    from: "",
+    to: "",
+    hours: "-",
+    decription: "",
+    image:""
+  })
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
- 
+
   const handleSend = () => {
-    const newDonation = {
-      id: Date.now().toString(),
-      name,
-      type,
-      address,
-      phone,
-      from,
-      to,
-      hours: fromHours + "-" + toHours,
-      decription,
-      image,
-    };
 
     const existingData = JSON.parse(localStorage.getItem("usersLS") || "[]");
 
-    const updatedData = [...existingData, newDonation];
+    const updatedData = [...existingData, formData];
 
     localStorage.setItem("usersLS", JSON.stringify(updatedData));
 
-    setName("");
-    setType("");
-    setAddress("");
-    setPhone("");
-    setFrom("");
-    setTo("");
-    setFromHours("");
-    setToHours("");
-    setDescription("");
-    setImage("");
+    setFormData({
+      id: Date.now().toString(),
+      name: "",
+      type: "",
+      address: "",
+      phone: "",
+      from: "",
+      to: "",
+      hours: "-",
+      decription: "",
+      image:"",
+    })
     window.history.back();
   };
   const handleCancel = () => {
@@ -58,7 +51,7 @@ function Donation() {
     if (fileInput && fileInput.files && fileInput.files.length > 0) {
       const file = fileInput.files[0];
       const imageUrl = URL.createObjectURL(file);
-      setImage(imageUrl);
+      setFormData({...formData, image:imageUrl});
     }
   };
   return (
@@ -73,7 +66,7 @@ function Donation() {
                 type="text"
                 id="name"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
               />
             </div>
             <div className="col-11 col-md-5 p-0 custom-color-01">
@@ -82,7 +75,7 @@ function Donation() {
                 type="text"
                 id="adress"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setAddress(e.target.value)}
+                onChange={(e) => setFormData({...formData, address: e.target.value})}
               />
             </div>
             <div className="col-11 col-md-5 p-0 me-md-2 custom-color-01">
@@ -91,13 +84,13 @@ function Donation() {
                 type="text"
                 id="phone"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setFormData({...formData, phone: e.target.value})}
               />
             </div>
             <div className="col-11 col-md-5 p-0">
               <select
                 className="w-100 mt-4 custom-color-01 rounded-1"
-                onChange={(e) => setType(e.target.value)}
+                onChange={(e) => setFormData({...formData, type: e.target.value})}
               >
                 <option value="">Choose</option>
                 <option value="Food">Food</option>
@@ -111,7 +104,7 @@ function Donation() {
                 type="date"
                 id="fromDate"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setFrom(e.target.value)}
+                onChange={(e) => setFormData({...formData, from: e.target.value})}
               />
             </div>
             <div className="col-11 col-md-5 p-0 mb-1 custom-color-01">
@@ -120,7 +113,7 @@ function Donation() {
                 type="date"
                 id="toDate"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setTo(e.target.value)}
+                onChange={(e) => setFormData({...formData, to: e.target.value})}
               />
             </div>
             <div className="col-11 col-md-5 p-0 me-md-2 mb-1 custom-color-01">
@@ -129,7 +122,7 @@ function Donation() {
                 type="time"
                 id="timeFrom"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setFromHours(e.target.value)}
+                onChange={(e) =>setFormData({...formData, hours: e.target.value+'-'+formData.hours.split("-")[1]})}
               />
             </div>
             <div className="col-11 col-md-5 p-0 mb-1 custom-color-01">
@@ -138,7 +131,7 @@ function Donation() {
                 type="time"
                 id="timeTo"
                 className="w-100 inputDonation rounded-1"
-                onChange={(e) => setToHours(e.target.value)}
+                onChange={(e) => setFormData({...formData, hours: formData.hours.split("-")[0]+'-'+e.target.value})}
               />
             </div>
             <div className="col-10 p-0 mb-1 custom-color-01">
@@ -146,34 +139,39 @@ function Donation() {
               <textarea
                 className="w-100 h-50 inputDonation rounded-1"
                 id="decription"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setFormData({...formData, decription: e.target.value})}
               ></textarea>
             </div>
             <div className="col-10 inputFile mb-1 inputDonation rounded-1 d-flex justify-content-center align-items-center position-relative">
-      
-      <input
-    type="file"
-    className="position-absolute opacity-0" 
-    accept="image/*"
-    onChange={handleImageChange}
-    ref={fileInputRef}
-    id="fileUpload" 
-  />
+              <input
+                type="file"
+                className="position-absolute opacity-0"
+                accept="image/*"
+                onChange={handleImageChange}
+                ref={fileInputRef}
+                id="fileUpload"
+              />
 
-<label htmlFor="fileUpload" className="uploadIconLabel d-flex justify-content-center align-items-center">
-    <DriveFolderUploadIcon sx={{ fontSize: 50 }} className="position-absolute top-50 start-50 translate-middle" />
-  </label>
+              <label
+                htmlFor="fileUpload"
+                className="uploadIconLabel d-flex justify-content-center align-items-center"
+              >
+                <DriveFolderUploadIcon
+                  sx={{ fontSize: 50 }}
+                  className="position-absolute top-50 start-50 translate-middle"
+                />
+              </label>
 
-{image && (
-    <img
-      src={image}
-      alt=""
-      width={250}
-      height={120}
-      className="position-absolute top-50 start-50 translate-middle"
-    />
-  )}
-    </div>
+              {formData.image && (
+                <img
+                  src={formData.image}
+                  alt=""
+                  width={250}
+                  height={120}
+                  className="position-absolute top-50 start-50 translate-middle"
+                />
+              )}
+            </div>
             <div className="col-11 col-md-5 d-grid p-0 mt-3 mb-md-3">
               <button
                 onClick={handleSend}

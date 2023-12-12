@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { urgents } from "../../data/Urgent";
 import { UrgentsProps } from "../../data/Urgent";
 import '../Amt/Amt.css'
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import "./Users.css";
 const User=()=>{
     const [urgentPosts, setUrgentPosts] = useState<UrgentsProps[]>([]);
+    const userIdObj=useParams()
+    const id=userIdObj.userId
+    localStorage.setItem("id", JSON.stringify(id));
 
     useEffect(() => {
       const urgentsPostsLS = JSON.parse(localStorage.getItem("urgentsPostsLS") || "[]");

@@ -2,9 +2,14 @@ import { NavLink, useLocation } from "react-router-dom";
 import "./navbar.css";
 import { useEffect, useState } from "react";
 import { UsersArrayProps } from "../../data/data";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 
 interface NavbarProps {
   setFilteredArrayProp: React.Dispatch<React.SetStateAction<UsersArrayProps[]>>;
+}
+interface ExtendedHistory extends History {
+  goBack: () => void;
 }
 
 const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
@@ -15,7 +20,16 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
   const storedUserName = localStorage.getItem("selectedUserName");
   const userName = storedUserName || "";
   const [inputValue, setInputValue] = useState("");
-  const [filteredArray, setFilteredArrayState] = useState<UsersArrayProps[]>(cards); 
+  const [filteredArray, setFilteredArrayState] =
+    useState<UsersArrayProps[]>(cards);
+
+  const matchId = location.pathname.match(/^\/(\d+)$/);
+  const id = matchId ? matchId[1] : "";
+ 
+
+  const handleGoBack = () => {
+    window.history.back();
+  };
 
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -34,12 +48,12 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
     });
 
     setFilteredArrayState(filtered);
-    setFilteredArrayProp(filtered); 
+    setFilteredArrayProp(filtered);
   };
 
   useEffect(() => {
     setFilteredArrayState(cards);
-    setFilteredArrayProp(cards); 
+    setFilteredArrayProp(cards);
   }, [cards, setFilteredArrayProp]);
 
   const amtPath =
@@ -48,7 +62,6 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
     location.pathname === "/amt/accepted" ||
     location.pathname === "/amt/ourposts";
 
- 
   return (
     <nav className="navbar navbar-expand-lg navbar1 position-relative">
       <div className="d-flex align-items-center">
@@ -64,10 +77,17 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
           </div>
         </NavLink>
         {location.pathname === "/amt" && (
-          <input type="text" onChange={handleInputValue} className="search" placeholder="Search..."/>
+          <input
+            type="text"
+            onChange={handleInputValue}
+            className="search"
+            placeholder="Search..."
+          />
         )}
         {location.pathname.match(/^\/\d+$/) && (
-          <span className="userName custom-color-01 fw-bold">Hello {userName}!</span>
+          <span className="userName custom-color-01 fw-bold">
+            Hello {userName}!
+          </span>
         )}
       </div>
       {!isLandingPage && (
@@ -119,11 +139,36 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
           )}
 
           {location.pathname.match(/^\/\d+$/) && (
-            <li className="nav-item">
-              <NavLink to={"/donation"} className="nav-link navLink">
-                Make a Donation
-              </NavLink>
-            </li>
+            <ul className="navbar-nav dropDownMenu mt-md-3">
+              <li className="nav-item">
+                <NavLink to={"/donation"} className="nav-link navLink">
+                  Make a Donation
+                </NavLink>
+              </li>
+              <li className="nav-item me-lg-3 ms-2 ms-lg-0 d-flex justify-content-center">
+                <NavLink to={"/myprofil"} className="nav-link navLink">
+                  <Box>
+                    <Avatar
+                      alt="User Avatar"
+                      src={`../images/person${id}.jpg`}
+                    />
+                  </Box>
+                </NavLink>
+              </li>
+            </ul>
+          )}
+          {location.pathname === "/myprofil" && (
+            <>
+              {" "}
+              <li className="d-flex justify-content-center">
+                <button
+                  onClick={handleGoBack}
+                  className="me-3 my-5 py-2 px-5 goBack border-0 rounded-2"
+                >
+                  BACK
+                </button>
+              </li>
+            </>
           )}
         </ul>
       </div>

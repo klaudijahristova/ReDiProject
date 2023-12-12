@@ -11,6 +11,7 @@ import Donation from './components/Donation/Donation'
 import OurPosts from './components/Amt/OurPosts'
 import { useState } from 'react'
 import { UsersArrayProps } from './data/data';
+import MyProfil from './components/Users/MyProfil'
 
 function App() {
   const [filteredArray, setFilteredArray] = useState<UsersArrayProps[]>([]);
@@ -29,6 +30,7 @@ function App() {
         <Route path='/amt/ourposts' element={<OurPosts/>}/>
         <Route path="/:userId" element={<User/>}/>
         <Route path="/donation" element={<Donation/>}/>
+        <Route path="/myprofil" element={<MyProfil/>}/>
       </Routes>
     </main>
     </>
