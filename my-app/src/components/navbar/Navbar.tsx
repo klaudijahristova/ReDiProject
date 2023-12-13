@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { UsersArrayProps } from "../../data/data";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import { ClockCircleOutlined } from "@ant-design/icons";
+import { Badge, Space } from "antd";
 
 interface NavbarProps {
   setFilteredArrayProp: React.Dispatch<React.SetStateAction<UsersArrayProps[]>>;
@@ -23,9 +25,15 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
   const [filteredArray, setFilteredArrayState] =
     useState<UsersArrayProps[]>(cards);
 
+  const acceptedDonationen = JSON.parse(
+    localStorage.getItem("acceptedDonations") || "null"
+  );
+  const numberOfAcceptedDon = acceptedDonationen
+    ? acceptedDonationen.length
+    : 0;
+
   const matchId = location.pathname.match(/^\/(\d+)$/);
   const id = matchId ? matchId[1] : "";
- 
 
   const handleGoBack = () => {
     window.history.back();
@@ -122,7 +130,13 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
               </li>
               <li className="nav-item">
                 <NavLink to={"/amt/accepted"} className="nav-link navLink">
-                  Accepted
+                  <Badge
+                    size="small"
+                    count={numberOfAcceptedDon}
+                    className="custom-color-01"
+                  >
+                    Accepted
+                  </Badge>
                 </NavLink>
               </li>
               <li className="nav-item">

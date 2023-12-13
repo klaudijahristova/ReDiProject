@@ -38,7 +38,7 @@ const numberOfDonation=filterUsersLS.length;
             </div>
             <div className="col-12 col-lg-6 d-flex flex-column align-items-center align-items-lg-start">
               <h1 className="mt-5 custom-color-01">{name}</h1>
-              <div className="my-3">
+              <div className="my-3 text-decoration-none">
                 <Link to={"https://www.facebook.com"}>  <FacebookIcon
                   className="custom-color-01"
                   sx={{ fontSize: 50 }}
