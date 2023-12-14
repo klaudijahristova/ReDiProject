@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./LanfingPage.css";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
 
 interface UsersProps {
   id: number;
@@ -20,6 +20,8 @@ const LandingPage = () => {
         setAllUsers(data);
       });
   }, []);
+
+
   useEffect(() => {
     if (selectedUserName) {
       localStorage.setItem("selectedUserName", selectedUserName);

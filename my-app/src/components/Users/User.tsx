@@ -4,6 +4,8 @@ import { UrgentsProps } from "../../data/Urgent";
 import '../Amt/Amt.css'
 import { Link, useParams } from "react-router-dom";
 import "./Users.css";
+
+
 const User=()=>{
     const [urgentPosts, setUrgentPosts] = useState<UrgentsProps[]>([]);
     const userIdObj=useParams()

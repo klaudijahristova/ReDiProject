@@ -31,6 +31,7 @@ function App() {
         <Route path="/:userId" element={<User/>}/>
         <Route path="/donation" element={<Donation/>}/>
         <Route path="/myprofil" element={<MyProfil/>}/>
+        <Route path='*' element={<h1 className='m-5 text-center'>404 Error</h1>}/>
       </Routes>
     </main>
     </>

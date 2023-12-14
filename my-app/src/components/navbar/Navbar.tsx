@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { UsersArrayProps } from "../../data/data";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import { ClockCircleOutlined } from "@ant-design/icons";
 import { Badge, Space } from "antd";
 
 interface NavbarProps {
@@ -25,6 +24,7 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
   const [filteredArray, setFilteredArrayState] =
     useState<UsersArrayProps[]>(cards);
 
+    //..................... Accepted Donation........................
   const acceptedDonationen = JSON.parse(
     localStorage.getItem("acceptedDonations") || "null"
   );
@@ -32,13 +32,16 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
     ? acceptedDonationen.length
     : 0;
 
+  // ......................Location Match.......................................
   const matchId = location.pathname.match(/^\/(\d+)$/);
   const id = matchId ? matchId[1] : "";
 
+  // ....................Go Back.....................................
   const handleGoBack = () => {
     window.history.back();
   };
 
+  //  ...........................Input Value..........................
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
@@ -59,11 +62,13 @@ const Navbar = ({ setFilteredArrayProp }: NavbarProps) => {
     setFilteredArrayProp(filtered);
   };
 
+// ...................................UseEffect..................
   useEffect(() => {
     setFilteredArrayState(cards);
     setFilteredArrayProp(cards);
   }, [cards, setFilteredArrayProp]);
 
+// .....................Path..........................................
   const amtPath =
     location.pathname === "/amt" ||
     location.pathname === "/amt/post" ||

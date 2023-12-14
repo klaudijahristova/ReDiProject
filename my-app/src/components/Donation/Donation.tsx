@@ -4,7 +4,6 @@ import "./Donation.css";
 
 function Donation() {
 
- 
   const [formData, setFormData] = useState({
     id: Date.now().toString(),
     name: "",
@@ -23,9 +22,7 @@ function Donation() {
   const handleSend = () => {
 
     const existingData = JSON.parse(localStorage.getItem("usersLS") || "[]");
-
     const updatedData = [...existingData, formData];
-
     localStorage.setItem("usersLS", JSON.stringify(updatedData));
 
     setFormData({
@@ -42,6 +39,7 @@ function Donation() {
     })
     window.history.back();
   };
+
   const handleCancel = () => {
     window.history.back();
   };
@@ -54,6 +52,8 @@ function Donation() {
       setFormData({...formData, image:imageUrl});
     }
   };
+
+  
   return (
     <div className="container">
       <h2 className="text-center my-3 custom-color-01">Make a Donation</h2>

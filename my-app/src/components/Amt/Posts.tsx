@@ -25,9 +25,13 @@ const Posts = () => {
     setDescription("");
     window.history.back();
   };
+
+
   const handleCancel = () => {
     window.history.back();
   };
+
+  
   return (
     <div className="container">
       <h1 className="text-center mt-5 custom-color-01">

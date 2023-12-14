@@ -27,12 +27,17 @@ const AmtHome = ({
     }
     setFilteredArray(storedUsers);
   }, []);
+
+  // .............Delete................................................. 
+
   const handleDelete = (id: string) => {
     const filteredUsers = storedUsers.filter(
       (user) => user.id.toString() !== id
     );
     updateStoredUsers(filteredUsers);
   };
+
+//................ Accepted..................................................
 
   const handleAccepted = (id: string) => {
     const acceptedDonation = storedUsers.find(
@@ -58,6 +63,8 @@ const AmtHome = ({
       updateStoredUsers(filteredUsers);
     }
   };
+
+  // ...............Update................................................
 
   const updateStoredUsers = (updatedUsers: UsersArrayProps[]) => {
     setStoredUsers(updatedUsers);
